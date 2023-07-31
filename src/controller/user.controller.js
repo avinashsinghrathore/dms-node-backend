@@ -26,8 +26,8 @@ const { info } = require("console");
     port: 465,
     secure: true, 
     auth: {
-      user: "avinashrathore@gmail.com",  // hide this info
-      pass: "xxxxxxxxxxxxxxxxxxxxxxxxx",             // hide this info
+      user: "avinashrathore121@gmail.com",  // hide this info
+      pass: "bibnatlsfzibksny",             // hide this info
     },
   });
 
@@ -161,7 +161,7 @@ exports.sendUserPasswordResetEmail = async (req, res) => {
     
       //send email link to reset password
       const info = await transporter.sendMail({
-        from: "avinashrathore@gmail.com", // sender address
+        from: "avinashrathore121@gmail.com", // sender address
         to: user.email, // list of receivers
         subject: "Password Reset Link", // Subject line
         text: "Hello world?", // plain text body
