@@ -4,7 +4,6 @@ const Product = model.Product;
 
 const { info } = require("console");
 
-
 // create - add new product
 exports.addNewProduct = async (req, res) => {
   try {
@@ -30,6 +29,32 @@ exports.getAllProductDetails = async (req, res) => {
   }
 };
 
+// read - findById - method
+exports.getProductDetails = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const doc = await Product.findById(id);
+    console.log(doc);
+    res.status(200).json(doc);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
+};
+
+// update - findOneAndUpdate - patch - method
+exports.updateProductDetails = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const updateDetail = await Product.findOneAndUpdate({ _id: id }, req.body, {
+      new: true,
+    });
+    res.status(201).json(updateDetail);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
+};
 
 // Delete method - delete product
 exports.deleteProductDetails = async (req, res) => {

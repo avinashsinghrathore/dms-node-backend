@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const validator = require('validator')
+const validator = require("validator");
 
 const { Schema } = mongoose;
 
@@ -21,7 +21,7 @@ const userSchema = new Schema({
     required: true,
     trim: true,
   },
-  
+
   phone_no: {
     type: Number,
     unique: true,
@@ -55,8 +55,7 @@ const userSchema = new Schema({
     minlength: 10,
     maxlength: 10,
     trim: true,
-  }
+  },
 });
 
 exports.User = mongoose.model("User", userSchema);
-

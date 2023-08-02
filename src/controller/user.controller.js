@@ -4,33 +4,19 @@ const User = model.User;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-// const dotenv = require("dotenv").config();
 
-// const transporter = require("../config/email.config")
-
-// const userotp = require("../model/userotp.model");
 const { info } = require("console");
 
-//email config
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     user:process.env.EMAIL,
-//     pass:process.env.PASSWORD
-//   }
-// })
-
-  // email config for link to reset password
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true, 
-    auth: {
-      user: "avinashrathore121@gmail.com",  // hide this info
-      pass: "bibnatlsfzibksny",             // hide this info
-    },
-  });
-
+// email config for link to reset password
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "avinashrathore121@gmail.com", // hide this info
+    pass: "bibnatlsfzibksny", // hide this info
+  },
+});
 
 // create - user registration
 exports.createUserRegistration = async (req, res) => {
@@ -158,7 +144,6 @@ exports.sendUserPasswordResetEmail = async (req, res) => {
       const link = `http://127.0.0.1:3000/api/user/reset/${user._id}/${token}`;
       console.log(link);
 
-    
       //send email link to reset password
       const info = await transporter.sendMail({
         from: "avinashrathore121@gmail.com", // sender address
@@ -213,72 +198,6 @@ exports.userPasswordReset = async (req, res) => {
   }
 };
 
-// otp generate
-// exports.userOtpSend = async (req, res) => {
-//   const { email } = req.body;
-
-//   if (!email) {
-//     res.status(400).json({ error: "please enter your email" });
-//   }
-
-//   try {
-//     const user = await users.findOne({ email: email });
-
-//     if (user) {
-//       const OTP = Math.floor(100000+Math.random()*900000)
-//       const existEmail = await userotp.findOne({email: email})
-//       if(existEmail) {
-//         const updateData = await userotp.findByIdAndUpdate({_id:existEmail._id}, {
-//           otp:OTP
-//         }, {new: true}
-//         )
-//         await updateData.save()
-
-//         const mailOptions = {
-//           from:process.env.EMAIL,
-//           to:email,
-//           subject:"sending email for otp validation",
-//           text:`OTP:- ${OTP}`
-//         }
-
-//         transporter.sendMail(mailOptions, (error, info) => {
-//           if(error) {
-//             console.log("error", error)
-//             res.status(400).json({message: "email sent successfully"})
-//           }
-//         })
-
-//       } else {
-//         const saveOtpData = new userotp ({
-//           email,otp: OTP
-//         })
-//         await saveOtpData.save()
-
-//         const mailOptions = {
-//           from:process.env.EMAIL,
-//           to:email,
-//           subject:"sending email for otp validation",
-//           text:`OTP:- ${OTP}`
-//         }
-
-//         transporter.sendMail(mailOptions, (error, info) => {
-//           if(error) {
-//             console.log("error", error)
-//             res.status(400).json({message: "email sent successfully"})
-//           }
-//         })
-
-//       }
-
-//     } else {
-//       res.status(400).json({error: "this user not exist in our db"})
-//     }
-
-//   } catch (error) {
-//     res.status(400).json({error: "invalid details", error})
-//   }
-// };
-
 // Read - all - find - method
 exports.getAllUserDetails = async (req, res) => {
   try {
@@ -328,7 +247,7 @@ exports.updateUserDetails = async (req, res) => {
     res.status(201).json(updateDetail);
   } catch (error) {
     console.log(error);
-    res.status(400).json(error);gwssvxwwssxh
+    res.status(400).json(error);
   }
 };
 
